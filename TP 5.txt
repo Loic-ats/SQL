@@ -1,0 +1,70 @@
+EXERCICE TP 5
+
+Question g : 
+
+SELECT F.NOM, A.DESIGNATION, A.PRIX
+FROM `article` AS A INNER JOIN `fournisseur` AS F ON A.id_fou = F.ID
+WHERE (F.ID = A.id_fou)
+
+ORDER BY F.NOM, A.PRIX DESC
+
+Question h :
+
+SELECT F.NOM, A.DESIGNATION, A.PRIX
+FROM `article` AS A INNER JOIN `fournisseur` AS F ON A.id_fou = F.ID
+WHERE (F.ID = A.id_fou) AND  F.NOM LIKE 'Dubois%'
+
+Question i : 
+
+SELECT F.NOM, AVG(A.PRIX) AS Moyenne
+FROM `article` AS A INNER JOIN `fournisseur` AS F ON A.id_fou = F.ID
+WHERE (F.ID = A.id_fou) AND  F.NOM LIKE 'Dubois%'
+
+Question j :
+
+ SELECT F.NOM, AVG(A.PRIX) AS Moyenne
+FROM `article` AS A INNER JOIN `fournisseur` AS F ON A.id_fou = F.ID
+WHERE (F.ID = A.id_fou)
+
+GROUP BY A.id_fou
+
+Question k :
+
+SELECT B.DATE_CMDE
+FROM bon AS B
+WHERE B.DATE_CMDE BETWEEN '2019/03/01' AND '2019/04/05 12:00:00'
+
+Question l: 
+
+SELECT B.DATE_CMDE, A.DESIGNATION
+FROM bon AS B, article AS A
+WHERE A.DESIGNATION LIKE 'boulon%'
+
+Question m : 
+
+SELECT B.NUMERO,F.NOM,A.DESIGNATION
+FROM bon AS B, article AS A, fournisseur AS F
+WHERE A.DESIGNATION LIKE 'boulon%'
+
+ORDER BY B.NUMERO ASC
+
+Question n :
+
+SELECT B.NUMERO, SUM(A.PRIX) AS Somme
+FROM bon AS B, article AS A, fournisseur AS F
+WHERE A.DESIGNATION LIKE 'boulon%'
+
+GROUP BY B.NUMERO
+
+Question o : 
+
+SELECT B.NUMERO, COUNT(A.REF) AS NBARTICLE
+FROM bon AS B, article AS A, fournisseur AS F
+WHERE A.DESIGNATION LIKE 'boulon%'
+
+GROUP BY B.NUMERO
+
+Question p: 
+
+
+ 

@@ -1,0 +1,47 @@
+SELECT 'AN' AS Choix, COUNT(*) as Compteur, SUM(P.`prixHT`) AS Somme
+FROM `produit` AS P
+WHERE `reference` LIKE '%AN%'
+GROUP BY Choix
+ORDER BY P.`prixHT` DESC
+
+--------------------------------------------------------------------------
+
+SELECT 'AN' AS Choix, COUNT(*) as Compteur, SUM(P.`prixHT`) AS Somme
+FROM `produit` AS P
+WHERE `reference` LIKE '%AN%' AND prixHT > 100
+GROUP BY Choix
+ORDER BY P.`prixHT` DESC
+
+---------------------------------------------------------------------------
+
+-- Dans le select 3 colonnes dont deux agrégats et le libelle de la categorie
+-- On pointe sur deux tables  : produit et categorie avec les alias (AS)
+-- On fait un lien avec la cle etrangère codeCategorie de la table Produit avec la colonne code
+-- de la table Categorie
+-- On regroupe par libellé de categorie
+-- On trie par la colonne Somme de plus grand au plus petit
+
+SELECT C.libelle, COUNT(*) as Compteur, SUM(P.`prixHT`) AS Somme 
+FROM `produit` AS P, categorie AS C
+WHERE (P.codeCategorie = C.code)
+
+GROUP BY C.libelle
+ORDER BY Somme DESC
+
+----------------------------------------------------------------------------
+
+-- Dans le select 3 colonnes dont deux agrégats et le libelle de la categorie
+-- On pointe sur deux tables  : produit et categorie avec les alias (AS)
+-- On fait un lien avec la jointure à l'égalité
+-- On regroupe par libellé de categorie
+-- On trie par la colonne Somme de plus grand au plus petit
+
+-- INNER JOINT ...ON -> Donne les renseignements communs entre deux tables sur ("ON") la ou les colonnes de clef étrangères
+
+SELECT C.libelle, COUNT(*) as Compteur, SUM(P.`prixHT`) AS Somme 
+FROM produit AS P INNER JOIN categorie AS C ON P.codeCategorie = C.code
+WHERE (P.codeCategorie = C.code)
+
+GROUP BY C.libelle
+ORDER BY Somme DESC
+
