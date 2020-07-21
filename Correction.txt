@@ -45,3 +45,14 @@ WHERE (P.codeCategorie = C.code)
 GROUP BY C.libelle
 ORDER BY Somme DESC
 
+
+------------------------------------------------------------------------------
+
+SELECT B.NUMERO, COUNT(A.REF) AS NBARTICLE
+FROM bon AS B, article AS A, fournisseur AS F
+WHERE A.DESIGNATION LIKE 'boulon%'
+
+GROUP BY B.NUMERO
+
+
+

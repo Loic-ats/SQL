@@ -50,9 +50,11 @@ ORDER BY B.NUMERO ASC
 
 Question n :
 
-SELECT B.NUMERO, SUM(A.PRIX) AS Somme
-FROM bon AS B, article AS A, fournisseur AS F
-WHERE A.DESIGNATION LIKE 'boulon%'
+SELECT b.numero,sum(a.prix) as `Prix Total` from bon as b 
+inner join compo as c on b.id = c.id_bon 
+inner join article as a on a.id = c.id_art 
+inner join fournisseur as f on f.id = a.idfou
+group by b.numero;
 
 GROUP BY B.NUMERO
 
@@ -66,5 +68,21 @@ GROUP BY B.NUMERO
 
 Question p: 
 
+SELECT B.NUMERO,C.QTE, SUM(C.QTE) AS Squantite
+FROM bon AS B 
+INNER JOIN compo AS C ON B.ID = C.id_bon
+INNER JOIN article AS A ON a.ID = C.id_art
+INNER JOIN fournisseur AS F ON f.ID = a.id_fou
 
- 
+
+GROUP BY B.NUMERO
+HAVING Squantite > 25
+
+Question q : 
+
+SELECT SUM(A.PRIX * C.QTE) AS Cout FROM bon AS B
+
+INNER JOIN compo AS C ON B.ID = C.id_bon
+INNER JOIN article AS A ON A.ID = C.id_art
+
+WHERE MONTH(B.DATE_CMDE) = 4
